@@ -5,7 +5,6 @@ import time
 
 capitols = []
 letters_of_capitol = []
-used_letters = []
 filename = 'stats.txt'
 capitol_file_name = 'capitols_database.txt'
 
@@ -31,6 +30,7 @@ def captiol():
 
 def captiol_letters():
     """Change randomed capitol to list + underscore"""
+    letters_of_capitol = []
     print('Guess what capitol gona be #$@% up }:-) : ')
     for capitol_letter in random_capitol:
         letters_of_capitol.append([capitol_letter.upper(), '_'])
@@ -57,6 +57,7 @@ def letter():
 
     if not user_letter in random_capitol:
         lives -= 1
+        print('')
         print('Ha! MISS motherfucker ! Remaining lives: ', lives)
         hint()
     print('\n Letter which you used: ', used_letters)
@@ -76,9 +77,10 @@ def word():
     else:
         lives -= 2
         if lives > 0:
+            print()
             print('Ha! MISS motherfucker ! Remaining lives: ', lives)
         hint()
-    return lives
+    return
 
 
 def hint():
@@ -153,14 +155,15 @@ def art_win():
 
 def main():
     """Main"""
-    global random_capitol, capitol_hint, lives, start_time, letters_of_capitol
+    global random_capitol, capitol_hint, lives, start_time, letters_of_capitol, used_letters
     capitol_data = captiol()
     capitol_hint = capitol_data[0]
     random_capitol = capitol_data[1].upper()  # Random Capitol and asign it
+    print(random_capitol)
     letters_of_capitol = captiol_letters()
     lives = 5
     start_time = time.time()
-
+    used_letters = []
     while True:
         if lives <= 0:
             boom()
@@ -172,7 +175,8 @@ def main():
         elif word_or_letter == 'w':
             lives = word()
         elif word_or_letter == 'x':
-            break
+            boom()
+            sys.exit()
         else:
             print('What the heck')
 
