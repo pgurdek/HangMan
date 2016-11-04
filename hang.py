@@ -80,7 +80,7 @@ def word():
             print()
             print('Ha! MISS motherfucker ! Remaining lives: ', lives)
         hint()
-    return
+    return lives
 
 
 def hint():
